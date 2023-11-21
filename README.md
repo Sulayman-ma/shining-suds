@@ -1,2 +1,2 @@
-# shining-suds
+# Shining Suds
 A digital laundromat service web app
