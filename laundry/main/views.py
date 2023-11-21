@@ -37,6 +37,7 @@ def create_account():
             )
             db.session.add(user)
             db.session.commit()
+            flash('Account created successfully', 'success')
             return redirect(url_for('auth.login'))
         except IntegrityError:
             flash('Email is already taken', 'misc')
