@@ -180,23 +180,23 @@ def place_order():
     return redirect(url_for('.order_success', id=order.id))
 
 
-@main.route('/review_order/<int:id>', methods=['GET', 'POST'])
+@main.route('/review_order/<int:id>', methods=['GET'])
 @login_required
 def write_review(id: int):
     order = Order.query.get(id)
-    form = WriteReview
+    form = WriteReview()
     if form.validate_on_submit():
-        try:
-            message = Message(
-                subject=form.subject.data,
-                message=form.message.data,
-                user_id=current_user.id
-            )
-            db.session.add(message)
-            db.session.commit()
-            flash('Review sent', 'success')
-            return redirect(url_for('.orders'))
-        except DatabaseError:
-            flash('Your message failed to send, please try again.', 'error')
-            return redirect(url_for('.write_review'))
+        # try:
+        message = Message(
+            subject=form.subject.data,
+            message=form.message.data,
+            user_id=current_user.id
+        )
+        db.session.add(message)
+        db.session.commit()
+        flash('Review sent', 'success')
+        return redirect(url_for('.orders'))
+        # except:
+        # flash('Your message failed to send, please try again.', 'error')
+        # return redirect(url_for('.write_review', id=id))
     return render_template('main/write_review.html', order=order, form=form)

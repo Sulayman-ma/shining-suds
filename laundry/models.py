@@ -69,7 +69,7 @@ class Message(db.Model):
     __tablename__ = 'messages'
 
     id = db.Column(db.Integer, primary_key=True)
-    subject = db.Column(db.String, nullable=False)
+    subject = db.Column(db.String)
     message = db.Column(db.Text(), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_user_id'))
