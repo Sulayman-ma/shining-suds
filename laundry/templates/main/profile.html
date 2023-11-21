@@ -1,0 +1,80 @@
+{% extends "shared/base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+
+<div id="main">
+    <!-- FLASH MESSAGES -->
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+    <div class="pop-flash">
+        <span class="{{ category }}">{{ msg }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="header custom-header">
+        <h1>Profile <img src="/static/img/svg/profile.svg" width="40px" alt=""></h1>
+        <img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white">
+    </div>
+
+    <div class="content">
+        <form method="POST" class="pure-form pure-form-stacked">
+            {{ form.hidden_tag() }}
+
+            <fieldset>
+                <legend>MY PROFILE</legend>
+                <div class="pure-g">
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        {{ form.name.label }}
+                        {{ form.name(class='pure-u-23-24') }}
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        {{ form.email.label }}
+                        {{ form.email(class='pure-u-23-24') }}
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        {{ form.phone.label }}
+                        {{ form.phone(class='pure-u-23-24') }}
+                    </div>
+                    <div class="pure-u-1">
+                        {{ form.address.label }}
+                        {{ form.address(class='pure-u-23-24') }}
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>ACCOUNT SETTINGS</legend>
+                <div class="pure-g">
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        {{ form.current_password.label }}
+                        {{ form.current_password(class='pure-u-23-24') }}
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        {{ form.new_password.label }}
+                        {{ form.new_password(class='pure-u-23-24') }}
+                    </div>
+                </div>
+            </fieldset>
+
+            <div class="pure-u-1 center">
+                {{ form.save(class='pure-button pure-button-primary boring-btn') }}
+            </div>
+            
+            <fieldset class="center">
+                <legend class="center-text">HELP CENTER</legend>
+                <div class="pure-g">
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <a href="#" class="mg-round pure-button pure-button-primary general">Support</a>
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-3">
+                        <a href="#" class="mg-round pure-button pure-button-primary general">Terms &amp; Conditions</a>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

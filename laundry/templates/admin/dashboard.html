@@ -1,0 +1,48 @@
+{% extends "shared/base.html" %}
+
+{% block title %}Dash{% endblock %}
+
+{% block content %}
+
+<div id="main">
+    <!-- FLASH MESSAGES -->
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+    <div class="pop-flash">
+        <span class="{{ category }}">{{ msg }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="header">
+        <h1>Admin Dashboard</h1>
+    </div>
+
+    <div class="content">
+        <div class="pure-g">
+            <div class="pure-u-1">
+                <table class="pure-table pure-table-striped center-text mg-top-20" style="width: 100%;">
+                    <thead></thead>
+                    <tbody>
+                        <tr>
+                            <td>Total Revenue</td>
+                            <td>{{ '₦{:,}'.format(total) }}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Orders</td>
+                            <td>{{ order_count }}</td>
+                        </tr>
+                        <tr>
+                            <td>In Progress Orders</td>
+                            <td>{{ in_progress }}</td>
+                        </tr>
+                        <tr>
+                            <td>Completed Orders</td>
+                            <td>{{ completed }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

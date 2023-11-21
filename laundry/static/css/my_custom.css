@@ -1,0 +1,255 @@
+/* 
+MY CUSTOM CSS FILES FOR FLASK FEATURES AND PERSONAL ADDITIONS
+-------------------------------------------------------------------------------*/
+
+
+
+/* Flash message categories
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.info { color: blue;  }
+
+.error { color: rgb(255, 0, 0); }
+
+.light-error { color: rgb(255, 151, 151); }
+
+.success { color: rgb(0, 197, 0); }
+
+.misc { color: rgb(253, 135, 0); }
+
+.warning { color: rgb(255, 94, 0); }
+
+.pop-flash {
+    position: fixed;
+    top: 0;
+    margin: 20px auto;
+    text-align: center;
+    width: 23%;
+    box-shadow: 0px 4px 16px 0px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    font-size: large;
+    transition: opacity 0.6s ease;
+    opacity: 1;
+    background-color: rgb(255, 255, 255);
+}
+
+/* small screens */
+@media (max-width: 400px) {
+    .pop-flash {
+        width: 70%;
+    }
+}
+/* ----------------------------------------------- */
+
+
+
+/* MISC
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mg-top-20 { margin-top: 20px; }
+.mg-top-50 { margin-top: 50px; }
+.mg-bot-20 { margin-bottom: 20px; }
+.mg-round { margin: 5px 5px; }
+.mg-zero { margin: 0; }
+
+.wide-content {
+    max-width: 960px;
+}
+
+.login, 
+.login a {
+    background-color: rgb(9, 63, 85);
+    color: rgb(217, 234, 255);
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.login input[type=submit] {
+    padding: 10px 25px;
+    border-radius: 10px;
+}
+
+/* small screens */
+@media (max-width: 564px) {}
+/* medium screens */
+@media (max-width: 920px) {}
+
+.filter {
+    display: flex;
+    /* width: 90%; */
+    justify-content: center;
+    /* margin: auto; */
+    /* padding: 0; */
+    /* background-color: rgba(0, 0, 0, 0); */
+    /* border: none; */
+}
+
+.font {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: black;
+    font-size: 50px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.menu-icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* ----------------------------------------------- */
+
+
+
+/* Custom Buttons and Inputs
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+a.submit,
+.submit {
+    background-color: rgb(0, 197, 0);
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+a.terminate,
+.terminate {
+    background-color: rgb(173, 32, 32);
+    color: rgb(255, 255, 255);
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+a.action,
+.action {
+    background-color: rgb(189, 91, 0);
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+a.general,
+.general {
+    background-color: rgb(9, 63, 85);
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=date],
+textarea,
+.pure-form select {
+    background-color: rgb(194, 240, 255);
+}
+
+a.boring-btn,
+.boring-btn {
+    background-color: rgb(194, 240, 255);
+    font-weight: bolder;
+    color: rgb(9, 63, 85);
+    text-transform: uppercase;
+    border-radius: 40px;
+    cursor: pointer;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+::placeholder {
+    color: rgb(9, 63, 85);
+    opacity: 0.7; /* Firefox */
+}
+
+::-ms-input-placeholder { /* Edge 12 -18 */
+    color: rgb(9, 63, 85);
+    opacity: 0.7;
+}
+
+.search-input {
+    padding: 10px;
+    border-radius: 10px;
+    border-width: 1px;
+}
+
+/* ----------------------------------------------- */
+
+
+
+/* Profile Page Elements
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.flat-listing {
+    text-align: center;
+}
+
+.flat-listing h2 {
+    color: black;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* ----------------------------------------------- */
+
+
+/* Orders
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.current, .past {
+    width: 100%;
+    margin: auto;
+}
+
+.order {
+    margin: 15px auto 10px auto;
+    background-color: rgb(153, 229, 255);
+    padding: 7px;
+    border-radius: 5px;
+    /* text-align: center; */
+}
+
+.order h1, .order h3, .order h4 {
+    color: rgb(9, 63, 85);
+}
+
+.order h1, .order p, .order h3, .order h4 {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+.tab-button {
+    width: 100%;
+    margin: 10px auto auto auto;
+    background-color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;    
+    font-weight: bolder;
+    font-size: larger;
+    color: rgb(9, 63, 85);
+}
+
+.active {
+    border-bottom: 5px solid rgb(9, 63, 85);
+}
+
+/* ----------------------------------------------- */
+#home {
+    background-color: rgb(9, 63, 85);
+    color: rgb(217, 234, 255);
+}
+
+.home-img {
+    width: 50%;
+    /* margin: auto; */
+    margin-left: 20%;
+}

@@ -1,0 +1,50 @@
+{% if current_user.is_authenticated %}
+
+<!-- ADMIN MENU -->
+{% if current_user.is_superuser %}
+<div class="pure-menu">
+    <span class="pure-menu-heading">Shining Suds</span>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+            <a href="{{ url_for('admin.dashboard') }}" class="pure-menu-link">Dashboard</a>
+        </li>
+        <li class="pure-menu-item">
+            <a href="{{ url_for('admin.inprogress') }}" class="pure-menu-link">In Progress</a>
+        </li>
+        <li class="pure-menu-item">
+            <a href="{{ url_for('admin.completed') }}" class="pure-menu-link">Completed</a>
+        </li>
+        <li class="pure-menu-item">
+            <a href="{{ url_for('admin.feedback') }}" class="pure-menu-link">Feedback</a>
+        </li>
+        <li class="pure-menu-item">
+            <a class="pure-menu-link" href="{{ url_for('auth.logout') }}">Logout</a>
+        </li>
+    </ul>
+</div>
+<!-- ------------------ -->
+
+{% elif not current_user.is_superuser %}
+<!-- OWNER MENU -->
+<div class="pure-menu">
+    <span class="pure-menu-heading">Shining Suds</span>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item">
+            <a class="pure-menu-link" href="{{ url_for('main.profile') }}">Profile</a>
+        </li>
+        <li class="pure-menu-item">
+            <a class="pure-menu-link" href="{{ url_for('main.schedule') }}">Schedule</a>
+        </li>
+        <li class="pure-menu-item">
+            <a class="pure-menu-link" href="{{ url_for('main.orders') }}">My Orders</a>
+        </li>
+        <li class="pure-menu-item">
+            <a class="pure-menu-link" href="{{ url_for('auth.logout') }}">Logout</a>
+        </li>
+    </ul>
+</div>
+<!-- ------------------ -->
+
+
+{% endif %}
+{% endif %}

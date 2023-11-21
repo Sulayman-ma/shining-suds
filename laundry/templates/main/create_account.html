@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+
+    <!-- PURE.CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pure-custom.css') }}", type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_custom.css') }}", type="text/css">
+
+    <title>Shining Suds - Create Account</title>
+</head>
+
+<body style="background-color: rgb(9, 63, 85);">
+    <!-- Main Content -->
+    <div class="login">
+        <div class="center">
+            <a href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white"></a>
+        </div>
+        <div class="center-text">
+            <h1>Create Account</h1>
+        </div>
+
+        <div class="content">
+            <form method="post" class="pure-form pure-form-stacked">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <div class="center" class="mg-zero">
+                    <label for="name">
+                        Name
+                        <input required type="text" name="name">
+                    </label>
+                </div>
+                <div class="center" class="mg-zero">
+                    <label for="email">
+                        E-mail
+                        <input required type="email" name="email">
+                    </label>
+                </div>
+                <div class="center" class="mg-zero">
+                    <label for="phone">
+                        Phone Number
+                        <input required type="tel" name="phone">
+                    </label>
+                </div>
+                <div class="center" class="mg-zero">
+                    <label for="address">
+                        Address
+                        <input required type="text" name="address">
+                    </label>
+                </div>
+                <div class="center" class="mg-zero">
+                    <label for="email">
+                        Password
+                        <input required type="password" name="password">
+                    </label>
+                </div>
+                <div class="center" class="mg-zero">
+                    <label for="confirm_password">
+                        Confirm Password
+                        <input required type="password" name="confirm_password">
+                    </label>
+                </div>
+                <!-- FLASH MESSAGES -->
+                {% for category, msg in get_flashed_messages(with_categories=True) %}
+                <div>
+                    <span class="{{ category }}">{{ msg }}</span>
+                </div>
+                {% endfor %}
+                <div class="center mg-top-20">
+                    <input type="submit" value="LOGIN" class="pure-button pure-button-primary boring-btn">
+                </div>
+            </form>
+
+            <a href="{{ url_for('auth.login') }}" class="center mg-top-20">Already have an account? Login here</a>
+        </div>
+    </div>
+
+    <script src="{{url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{url_for('static', filename='js/ui.js') }}"></script>
+</body>
+
+</html>

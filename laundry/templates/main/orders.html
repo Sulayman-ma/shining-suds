@@ -1,0 +1,71 @@
+{% extends "shared/base.html" %}
+
+{% block title %}My Orders{% endblock %}
+
+{% block content %}
+
+<div id="main">
+    <!-- FLASH MESSAGES -->
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+    <div class="pop-flash">
+        <span class="{{ category }}">{{ msg }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="header custom-header">
+        <h1>My Orders <img src="/static/img/svg/order.svg" width="45px" alt=""></h1>
+        <img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white">
+    </div>
+
+    <div class="content" id="inProgress">
+        <div class="pure-g">
+            <div class="pure-u-1-2">
+                <button type="button" class="tab-button active" onclick="orderView('current')">Current Orders</button>
+            </div>
+            <div class="pure-u-1-2">
+                <button type="button" class="tab-button" onclick="orderView('past')">Past Orders</button>
+            </div>
+        </div>
+
+        <hr style="margin: 0;">
+
+        <div class="pure-g" id="current">
+            {% for order in orders %}
+            {% if not order.status %}
+            <div class="pure-u-1 order">
+                <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
+                <p>Pickup: {{ order.pickup_date.strftime('%a, %d %b %Y') }} at {{ order.pickup_addr }}</p>
+                <p>Delivery: {{ order.delivery_date.strftime('%a, %d %b %Y') }} at {{ order.delivery_addr }}</p>
+                <p>Service Type: {{ order.service_type }}</p>
+                <h4>Cost: {{ '₦{:,}'.format(order.amount) }}</h4>
+                <h3>STATUS: IN PROGRESS</h3>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+
+        <div class="pure-g" id="past" style="display: none;">
+            {% for order in orders %}
+            {% if order.status %}
+            <div class="pure-u-1 order">
+                <form method="post" class="pure-form" action="{{ url_for('.write_review', id=order.id) }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+                    <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
+                    <p>Pickup: {{ order.pickup_date.strftime('%a, %d %b %Y') }} at {{ order.pickup_addr }}</p>
+                    <p>Delivery: {{ order.delivery_date.strftime('%a, %d %b %Y') }} at {{ order.delivery_addr }}</p>
+                    <p>Service Type: {{ order.service_type }}</p>
+                    <h4>Cost: {{ '₦{:,}'.format(order.amount) }}</h4>
+                    <h3>STATUS: COMPLETED</h3>
+                    <div class="pure-controls">
+                        <input type="submit" class="boring-btn pure-button pure-button-primary" value="Write Review">
+                    </div>
+                </form>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

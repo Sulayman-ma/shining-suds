@@ -1,0 +1,37 @@
+{% extends "shared/base.html" %}
+
+{% block title %}Schedule{% endblock %}
+
+{% block content %}
+
+<div id="main">
+    <!-- FLASH MESSAGES -->
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+    <div class="pop-flash">
+        <span class="{{ category }}">{{ msg }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="header custom-header">
+        <h1>Schedule <img src="/static/img/svg/schedule.svg" width="40px" alt=""></h1>
+        <img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white">
+    </div>
+
+    <div class="content">
+        <h1>Dear {{ current_user.name }},</h1>
+        <div class="center-text">
+            <img src="{{ url_for('static', filename='img/svg/success-svgrepo-com.svg') }}" alt="success-icon"> <br>
+            <h3>Your pickup for {{ order.pickup_date.strftime('%a, %d %b %Y') }} has been scheduled.</h3> <br>
+            <h3>Delivery date: {{ order.delivery_date.strftime('%a, %d %b %Y') }}</h3> <br>
+
+            <h3>Cost: {{ '₦{:,}'.format(order.amount) }}</h3>
+
+            <a href="{{ url_for('.orders') }}" class="pure-button pure-button-primary boring-btn">OKAY</a>
+            <br> <br>
+            <a href="#">Need to reschedule? Contact Support.</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

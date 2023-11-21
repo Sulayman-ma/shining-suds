@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+
+    <!-- PURE.CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pure-custom.css') }}", type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_custom.css') }}", type="text/css">
+
+    <title>Shining Suds - Home</title>
+</head>
+
+<body id="home">
+    <div class="center">
+        <a href="{{ url_for('main.home') }}"><img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white" class="mg-top-50"></a>
+    </div>
+
+    <div class="content">
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <h1 class="center-text">
+                    About Us
+                </h1>
+                <h3 class="center-text">
+                    Shining Suds is your Your #1 Digital Laundromat in Nigeria
+                    Convenient. Seamless. Easy to use. <br> <br> Create an account now and get an amazing experience with us.
+                </h3>
+                <div class="pure-g">
+                    <div class="pure-u-1 pure-u-md-1-2 mg-bot-20">
+                        <a href="{{ url_for('main.create_account') }}" class="pure-button pure-button-primary boring-btn center">Get Started</a>
+                    </div>
+                    <div class="pure-u-1 pure-u-md-1-2 mg-bot-20">
+                        <a href="{{ url_for('auth.login') }}" class="pure-button pure-button-primary boring-btn center">Login</a>
+                    </div>
+                </div>
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <img src="/static/img/svg/washer.svg" class="mg-top-20 home-img" alt="washer-icon">
+            </div>
+        </div>
+
+        <div class="pure-g">
+            <div class="pure-u-1 pure-u-md-1-2">
+                <img src="/static/img/svg/laundry.svg" class="mg-top-20 home-img" alt="washer-icon">
+            </div>
+            <div class="pure-u-1 pure-u-md-1-2">
+                <h1 class="center-text">
+                    How it works
+                </h1>
+                <h3>
+                    <ul>
+                        <li>Confirm your default address in your profile</li>
+                        <li>Schedule an order with both cash on delivery and online payment options</li>
+                        <li>Track your orders on the My Orders page</li>
+                        <li>Our agents will pickup and delivery your laundry at the specified addresses and dates</li>
+                    </ul>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <script src="{{url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{url_for('static', filename='js/ui.js') }}"></script>
+</body>
+
+</html>

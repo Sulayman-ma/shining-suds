@@ -1,0 +1,52 @@
+{% extends "shared/base.html" %}
+
+{% block title %}Completed{% endblock %}
+
+{% block content %}
+
+<div id="main">
+    <!-- FLASH MESSAGES -->
+    {% for category, msg in get_flashed_messages(with_categories=True) %}
+    <div class="pop-flash">
+        <span class="{{ category }}">{{ msg }}</span>
+    </div>
+    {% endfor %}
+
+    <div class="header">
+        <h1>Completed Orders</h1>
+    </div>
+
+    <div class="content">
+        <h3 class="center" style="margin-bottom: 0;">Filter by Service Type</h3>
+        <div class="pure-menu pure-menu-horizontal filter">
+            <ul class="pure-menu-list">
+                <li class="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+                    <a href="#" id="menuLink1" class="pure-menu-link">{{ service_type or 'All' }}</a>
+                    <ul class="pure-menu-children">
+                        <li class="pure-menu-item">
+                            <a href="{{ url_for('.completed') }}" class="pure-menu-link">All</a>
+                        </li>
+                        {% for service_type in types %}
+                        <li class="pure-menu-item">
+                            <a href="{{ url_for('.completed_filt', service_type=service_type) }}" class="pure-menu-link">{{ service_type }}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="pure-g">
+            {% for order in orders %}
+            <div class="pure-u-1 order">
+                <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
+                <p>Customer: {{ User.get(order.user_id).email }}</p>
+                <p>Service Type: {{ order.service_type }}</p>
+                <h3>COST: {{ '₦{:,}'.format(order.amount) }}</h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
