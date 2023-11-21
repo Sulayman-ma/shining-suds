@@ -70,12 +70,12 @@
                 </div>
                 <!-- FLASH MESSAGES -->
                 {% for category, msg in get_flashed_messages(with_categories=True) %}
-                <div>
+                <div class="center-text">
                     <span class="{{ category }}">{{ msg }}</span>
                 </div>
                 {% endfor %}
                 <div class="center mg-top-20">
-                    <input type="submit" value="CREATE" class="pure-button pure-button-primary boring-btn">
+                    <input type="submit" value="SIGN UP" class="pure-button pure-button-primary boring-btn">
                 </div>
             </form>
 

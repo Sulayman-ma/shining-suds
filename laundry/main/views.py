@@ -20,20 +20,20 @@ def home():
 
 @main.route('/create_account', methods=['GET', 'POST'])
 def create_account():
-    if request.method == 'post':
-        form = request.form
-        second_pass = form.get('confirm_password')
-        password = form.get('password')
-        if password != second_pass:
-            flash('Passwords much match', 'misc')
-            return redirect(url_for('.create_account'))
+    if request.method == 'POST':
         try:
+            form = request.form
+            pass2 = form.get('confirm_password')
+            pass1 = form.get('password')
+            if pass1 != pass2:
+                flash('Passwords must match', 'misc')
+                return redirect(url_for('.create_account'))
             user = User(
                 name=form.get('name'),
                 email=form.get('email'),
                 phone=form.get('phone'),
                 address=form.get('address'),
-                password=form.get('password')
+                password=pass1
             )
             db.session.add(user)
             db.session.commit()
