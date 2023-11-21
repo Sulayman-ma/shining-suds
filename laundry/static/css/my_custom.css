@@ -52,7 +52,11 @@ MY CUSTOM CSS FILES FOR FLASK FEATURES AND PERSONAL ADDITIONS
 
 .custom-header {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+
+#header-logo {
+    background: url('/static/img/icon.png') no-repeat;
 }
 
 .mg-top-20 { margin-top: 20px; }
@@ -86,12 +90,7 @@ MY CUSTOM CSS FILES FOR FLASK FEATURES AND PERSONAL ADDITIONS
 
 .filter {
     display: flex;
-    /* width: 90%; */
     justify-content: center;
-    /* margin: auto; */
-    /* padding: 0; */
-    /* background-color: rgba(0, 0, 0, 0); */
-    /* border: none; */
 }
 
 .font {

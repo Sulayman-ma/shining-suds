@@ -9,7 +9,6 @@ from laundry import db
 from laundry.main import main
 from laundry.models import Order, Message, User
 from laundry.main.forms import EditProfile, ScheduleOrder, WriteReview
-from laundry.duckstack.transaction import Transaction
 
 
 
@@ -79,11 +78,41 @@ def profile():
     return render_template('main/profile.html', form=form)
 
 
-@main.route('/orders', methods=['GET', 'POST'])
+@main.route('/orders')
 @login_required
 def orders():
     orders = Order.query.filter_by(user_id = current_user.id).order_by(Order.created).all()
     return render_template('main/orders.html', orders=orders)
+
+
+@main.route('/write_review/<int:id>', methods=['GET', 'POST'])
+@login_required
+def write_review(id: int):
+    print("Reached the write_review view function")  # Debug statement
+
+    order = Order.query.get(id)
+    orders = current_user.orders
+    if order not in orders:
+        return redirect(url_for('main.profile'))
+    
+    if request.method == 'POST':
+        print("Form submitted via POST")  # Debug statement
+
+        if 'subject' in request.form and 'message' in request.form:
+            message = Message(
+                subject=request.form.get('subject'),
+                message=request.form.get('message'),
+                user_id=current_user.id
+            )
+            db.session.add(message)
+            db.session.commit()
+            flash('Review sent', 'success')
+            return redirect(url_for('.orders'))
+        else:
+            print("Subject or message not found in request.form")  # Debug statement
+
+    return render_template('main/write_review.html', id=id)
+
 
 
 def create_order(data: dict) -> Order:
@@ -179,25 +208,3 @@ def place_order():
         flash('An error has occured, please try again', 'error')
         return redirect(url_for('.schedule'))
     return redirect(url_for('.order_success', id=order.id))
-
-
-@main.route('/review_order/<int:id>', methods=['GET'])
-@login_required
-def write_review(id: int):
-    order = Order.query.get(id)
-    form = WriteReview()
-    if form.validate_on_submit():
-        # try:
-        message = Message(
-            subject=form.subject.data,
-            message=form.message.data,
-            user_id=current_user.id
-        )
-        db.session.add(message)
-        db.session.commit()
-        flash('Review sent', 'success')
-        return redirect(url_for('.orders'))
-        # except:
-        # flash('Your message failed to send, please try again.', 'error')
-        # return redirect(url_for('.write_review', id=id))
-    return render_template('main/write_review.html', order=order, form=form)

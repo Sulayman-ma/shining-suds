@@ -26,6 +26,9 @@ def login():
         if user.is_superuser:
             next = url_for('admin.dashboard')
             return redirect(next)
+        next = request.args.get('next')
+        if next is not None and next != '/':
+            return redirect(next)
         # send users to home page
         return redirect(url_for('main.profile'))
     return render_template('shared/login.html')
@@ -35,4 +38,4 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.home'))
+    return redirect(url_for('auth.login'))

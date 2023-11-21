@@ -69,16 +69,16 @@ def complete_order(id: int):
     return redirect(url_for('.inprogress'))
 
 
-@admin.route('/feedback')
+@admin.route('/review')
 @login_required
-def feedback():
+def reviews():
     messages = Message.query.all()
-    return render_template('admin/feedback.html', messages=messages)
+    return render_template('admin/reviews.html', messages=messages)
 
 
-@admin.route('/feedback/<int:id>')
+@admin.route('/review/<int:id>')
 @login_required
-def feedback_msg(id):
+def review_msg(id):
     message = Message.query.get(id)
     user = User.get(message.user_id)
-    return render_template('admin/feedback_msg.html', message=message, user=user)
+    return render_template('admin/review_msg.html', message=message, user=user)

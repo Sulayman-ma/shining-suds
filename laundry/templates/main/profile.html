@@ -13,12 +13,12 @@
     {% endfor %}
 
     <div class="header custom-header">
-        <h1>Profile <img src="/static/img/svg/profile.svg" width="40px" alt=""></h1>
+        <h2>Profile <img src="/static/img/svg/profile.svg" width="40px" alt="" class="mg-top-20"></h2>
         <img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white">
     </div>
 
     <div class="content">
-        <form method="POST" class="pure-form pure-form-stacked">
+        <form method="POST" class="pure-form pure-form-stacked" autocomplete="off">
             {{ form.hidden_tag() }}
 
             <fieldset>

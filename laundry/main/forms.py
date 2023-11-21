@@ -70,6 +70,7 @@ class WriteReview(FlaskForm):
     })
     message = TextAreaField(label='Message', render_kw={
         'placeholder': 'Tell us about your experience...',
-        'required': 'required'
+        'required': 'required',
+        'rows': '20'
     })
     send = SubmitField(label='Send Review')

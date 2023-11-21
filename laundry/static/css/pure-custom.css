@@ -87,7 +87,7 @@ appears on the left side of the page.
     width: 170px;
     position: fixed;
     top: 0;
-    left: 0;
+    left: -20px;
     bottom: 0;
     z-index: 1000; /* so the menu or its navicon stays above all content */
     background: #191818;
@@ -165,8 +165,7 @@ small screens.
     display: block; /* show this only on small screens */
     top: 0;
     left: 0; /* "#menu width" */
-    background: #000;
-    background: rgba(0,0,0,0.7);
+    background: #0000005e;
     font-size: 10px; /* change this value to increase/decrease button size */
     z-index: 10;
     width: 2em;
