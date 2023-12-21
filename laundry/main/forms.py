@@ -46,16 +46,13 @@ class ScheduleOrder(FlaskForm):
     pickup_date = DateField(label='Pickup Date', render_kw={
         'required': 'required'
     })
-    delivery_date = DateField(label='Delivery Date', render_kw={
-        'required': 'required'
-    })
     pickup_addr = StringField(label='Pickup Address', render_kw={
         'placeholder': 'Leave blank to use default address set in profile'
     })
     delivery_addr = StringField(label='Delivery Address', render_kw={
         'placeholder': 'Leave blank to use default address set in profile'
     })
-    message = TextAreaField(label='Special Instructions')
+    special_instr = TextAreaField(label='Special Instructions')
     clothes_count = IntegerField(label='Clothes Count', render_kw={
         'placeholder': 'Number of clothes',
         'required': 'required'

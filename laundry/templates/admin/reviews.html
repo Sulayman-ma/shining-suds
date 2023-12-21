@@ -20,13 +20,13 @@
         <h1 class="content-subhead center">Review Messages</h1>
         {% for msg in messages %}
         <h2>
-            <a href="{{ url_for('.review_msg', id=msg.id) }}">{{ msg.subject }}</a>
+            <a href="{{ url_for('.review', id=msg.id) }}" style="text-decoration: none;">{{ msg.subject }}</a>
         </h2> 
         <h4>
             {{ msg.timestamp.strftime("%Y-%B-%d") }}, 
             {{ msg.timestamp.strftime("%H:%M") }}
         </h4>
-        <p>{{ msg.message[:250] }}... <a href="{{ url_for('.review_msg', id=msg.id) }}">Read More</a></p>
+        <p>{{ msg.message[:250] }}... <a href="{{ url_for('.review', id=msg.id) }}">Read More</a></p>
         {% endfor %}
     </div>
 </div>

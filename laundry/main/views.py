@@ -8,7 +8,7 @@ from sqlalchemy.exc import IntegrityError, DatabaseError
 from laundry import db
 from laundry.main import main
 from laundry.models import Order, Message, User
-from laundry.main.forms import EditProfile, ScheduleOrder, WriteReview
+from laundry.main.forms import EditProfile, ScheduleOrder
 
 
 
@@ -69,8 +69,11 @@ def profile():
             flash('Invalid inputs', 'misc')
             return redirect(url_for('.profile'))
         except IntegrityError:
-            flash('Email already taken', 'misc')
-            return redirect(url_for('.profile'))
+            if current_user.email != form.email.data:
+                flash('Email already taken', 'misc')
+                return redirect(url_for('.profile'))
+            else:
+                pass
         except:
             flash('An error has occured, please try again', 'error')
             return redirect(url_for('.profile'))
@@ -88,28 +91,29 @@ def orders():
 @main.route('/write_review/<int:id>', methods=['GET', 'POST'])
 @login_required
 def write_review(id: int):
-    print("Reached the write_review view function")  # Debug statement
-
     order = Order.query.get(id)
     orders = current_user.orders
     if order not in orders:
         return redirect(url_for('main.profile'))
     
     if request.method == 'POST':
-        print("Form submitted via POST")  # Debug statement
-
         if 'subject' in request.form and 'message' in request.form:
             message = Message(
                 subject=request.form.get('subject'),
                 message=request.form.get('message'),
-                user_id=current_user.id
+                user_id=current_user.id,
+                order_id=id
             )
+            # mark order as reviewed
+            order.reviewed = True
             db.session.add(message)
             db.session.commit()
             flash('Review sent', 'success')
             return redirect(url_for('.orders'))
         else:
-            print("Subject or message not found in request.form")  # Debug statement
+            # print("Subject or message not found in request.form")  # Debug statement
+            flash('Please enter a review subject and message')
+            return redirect(url_for('.write_review'))
 
     return render_template('main/write_review.html', id=id)
 
@@ -122,7 +126,7 @@ def create_order(data: dict) -> Order:
     data -- Order form data
     Return: None
     """
-    
+
     order = Order(**data)
     db.session.add(order)
     db.session.commit()
@@ -137,18 +141,13 @@ def schedule():
         try:
             clothes_count = form.clothes_count.data
             pickup_date = datetime.datetime.strptime(str(form.pickup_date.data), '%Y-%m-%d')
-            delivery_date = datetime.datetime.strptime(str(form.delivery_date.data), '%Y-%m-%d')
-            if pickup_date > delivery_date:
-                flash('Pickup cannot be after delivery.', 'misc')
-                return redirect(url_for('.schedule'))
             # store form data for processing
             session.setdefault('order_data', {
                 'amount': clothes_count * 50,
-                'message': form.message.data,
+                'special_instr': form.special_instr.data,
                 'service_type': form.service_type.data,
                 'clothes_count': clothes_count,
                 'pickup_date': pickup_date,
-                'delivery_date': delivery_date,
                 'pickup_addr': form.pickup_addr.data or current_user.address,
                 'delivery_addr': form.delivery_addr.data or current_user.address,
                 'user_id': current_user.id
@@ -159,9 +158,6 @@ def schedule():
                 return redirect(url_for('.place_order'))
         except ValidationError:
             flash('Invalid inputs', 'misc')
-            return redirect(url_for('.schedule'))
-        except IntegrityError:
-            flash('Email already taken', 'misc')
             return redirect(url_for('.schedule'))
         except:
             flash('An error has occured, please try again', 'error')
@@ -199,7 +195,7 @@ def place_order():
     try:
         order = create_order(session.pop('order_data'))
     except IntegrityError:
-        flash('Please input number of clothes', 'misc')
+        flash('Please fill the address fields', 'misc')
         return redirect(url_for('.schedule'))
     except DatabaseError:
         flash('A database error has occured, please try again.', 'error')

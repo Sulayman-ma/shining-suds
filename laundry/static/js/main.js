@@ -64,3 +64,24 @@ function dismissFlash() {
 }
 
 setTimeout(dismissFlash, 5000)
+
+// disable previous dates up to next two days for pickup
+function setMinimumDate() {
+    const dateField = document.getElementById('pickup_date');
+
+    // Get today's date
+    const today = new Date();
+
+    // Calculate the day after tomorrow
+    const dayAfterTomorrow = new Date();
+    dayAfterTomorrow.setDate(today.getDate() + 2);
+
+    // Format the day after tomorrow as YYYY-MM-DD for setting the input's min attribute
+    const dayAfterTomorrowFormatted = dayAfterTomorrow.toISOString().split('T')[0];
+
+    // Set the minimum date for the input field
+    dateField.setAttribute('min', dayAfterTomorrowFormatted);
+}
+
+// Run the function when the page loads
+window.addEventListener('load', setMinimumDate);

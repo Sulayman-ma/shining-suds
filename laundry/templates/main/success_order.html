@@ -21,8 +21,10 @@
         <h1>Dear {{ current_user.name }},</h1>
         <div class="center-text">
             <img src="{{ url_for('static', filename='img/svg/success-svgrepo-com.svg') }}" alt="success-icon"> <br>
-            <h3>Your pickup for {{ order.pickup_date.strftime('%a, %d %b %Y') }} has been scheduled.</h3> <br>
-            <h3>Delivery date: {{ order.delivery_date.strftime('%a, %d %b %Y') }}</h3> <br>
+            <h3>Your pickup for {{ order.pickup_date.strftime('%a, %d %b %Y') }} has been scheduled. You will be contacted at least 10 hours prior to the pickup.</h3>
+            <h3>Upon service completion, you will be notified</h3> <br>
+            <h3>Pickup location: {{ order.pickup_addr }}</h3>
+            <h3>Delivery location: {{ order.delivery_addr }}</h3>
 
             <h3>Cost: {{ '₦{:,}'.format(order.amount) }}</h3>
 

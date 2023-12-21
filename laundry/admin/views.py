@@ -5,6 +5,8 @@ from laundry import db
 from laundry.admin import admin
 from laundry.models import Order, User, Message
 
+from sqlalchemy import desc
+
 
 
 @admin.route('/dashboard')
@@ -72,13 +74,13 @@ def complete_order(id: int):
 @admin.route('/review')
 @login_required
 def reviews():
-    messages = Message.query.all()
+    messages = Message.query.order_by(desc(Message.timestamp)).all()
     return render_template('admin/reviews.html', messages=messages)
 
 
 @admin.route('/review/<int:id>')
 @login_required
-def review_msg(id):
+def review(id):
     message = Message.query.get(id)
     user = User.get(message.user_id)
-    return render_template('admin/review_msg.html', message=message, user=user)
+    return render_template('admin/review.html', message=message, user=user)

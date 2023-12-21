@@ -36,7 +36,6 @@
             <div class="pure-u-1 order">
                 <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
                 <p>Pickup: {{ order.pickup_date.strftime('%a, %d %b %Y') }} at {{ order.pickup_addr }}</p>
-                <p>Delivery: {{ order.delivery_date.strftime('%a, %d %b %Y') }} at {{ order.delivery_addr }}</p>
                 <p>Service Type: {{ order.service_type }}</p>
                 <h4>Cost: {{ '₦{:,}'.format(order.amount) }}</h4>
                 <h3>STATUS: IN PROGRESS</h3>
@@ -51,11 +50,14 @@
             <div class="pure-u-1 order">
                 <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
                 <p>Pickup: {{ order.pickup_date.strftime('%a, %d %b %Y') }} at {{ order.pickup_addr }}</p>
-                <p>Delivery: {{ order.delivery_date.strftime('%a, %d %b %Y') }} at {{ order.delivery_addr }}</p>
                 <p>Service Type: {{ order.service_type }}</p>
                 <h4>Cost: {{ '₦{:,}'.format(order.amount) }}</h4>
                 <h3>STATUS: COMPLETED</h3>
+                {% if not order.reviewed %}
                 <a href="{{ url_for('.write_review', id=order.id) }}" class="pure-button pure-button-primary boring-btn">Write Review</a>
+                {% else %}
+                <input type="button" value="Review Written" class="pure-button pure-button-primary boring-btn" disabled>
+                {% endif %}
             </div>
             {% endif %}
             {% endfor %}

@@ -49,13 +49,12 @@ class Order(db.Model):
     clothes_count = db.Column(db.Integer, nullable=False)
     status = db.Column(db.BOOLEAN, default=False)
     service_type = db.Column(db.String, default='WASH & IRON')
-    message = db.Column(db.Integer, nullable=True)
     created = db.Column(db.DateTime, default=datetime.datetime.now())
     pickup_date = db.Column(db.DateTime, nullable=False)
-    delivery_date = db.Column(db.DateTime, nullable=False)
     pickup_addr = db.Column(db.String, nullable=False)
     delivery_addr = db.Column(db.String, nullable=False)
-    # paid = db.Column(db.Boolean, default=False)
+    reviewed = db.Column(db.BOOLEAN, default=False)
+    special_instr = db.Column(db.Text(), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_user_id'))
 
     # Relationships
@@ -73,9 +72,12 @@ class Message(db.Model):
     message = db.Column(db.Text(), nullable=False)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id', name='fk_user_id'))
+    order_id = db.Column(db.Integer, db.ForeignKey('orders.id',
+    name='fk_order_id'))
 
     # Relationships
     user = db.relationship("User", uselist=False, backref="messages")
+    order = db.relationship("Order", uselist=False, backref="message")
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)

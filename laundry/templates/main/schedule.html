@@ -49,11 +49,7 @@
                     </div>
                     <div class="pure-u-1 pure-u-md-1-3">
                         {{ form.pickup_date.label }}
-                        {{ form.pickup_date(class='pure-u-23-24') }}
-                    </div>
-                    <div class="pure-u-1 pure-u-md-1-3">
-                        {{ form.delivery_date.label }}
-                        {{ form.delivery_date(class='pure-u-23-24') }}
+                        {{ form.pickup_date(class='pure-u-23-24', id='pickup_date') }}
                     </div>
                     <div class="pure-u-1 pure-u-md-1-2">
                         {{ form.pickup_addr.label }}
@@ -64,8 +60,8 @@
                         {{ form.delivery_addr(class='pure-u-23-24') }}
                     </div>
                     <div class="pure-u-1">
-                        {{ form.message.label }}
-                        {{ form.message(class='pure-u-1') }}
+                        {{ form.special_instr.label }}
+                        {{ form.special_instr(class='pure-u-1') }}
                     </div>
                 </div>
             </fieldset>
