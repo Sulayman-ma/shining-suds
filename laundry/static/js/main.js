@@ -32,6 +32,24 @@ function updateCost() {
     cost.textContent = (event.target.value * 50).toLocaleString()
 }
 
+function calculateTotal() {
+    const serviceSelect = document.getElementById('service');
+    const quantityInput = document.getElementById('count');
+    const totalPriceElement = document.getElementById('totalPrice');
+
+    const selectedService = serviceSelect.value;
+    const price = parseFloat(serviceSelect.options[serviceSelect.selectedIndex].getAttribute('data-price'));
+    const quantity = parseInt(quantityInput.value);
+
+    const totalPrice = price * quantity;
+
+    if (isNaN(totalPrice) || quantity <= 0) {
+        totalPriceElement.textContent = 0
+    } else {
+        totalPriceElement.textContent = totalPrice.toLocaleString();
+    }
+}
+
 function search() {
     var input, query, rows;
     input = document.querySelector('#searchBtn')
@@ -74,7 +92,7 @@ function setMinimumDate() {
 
     // Calculate the day after tomorrow
     const dayAfterTomorrow = new Date();
-    dayAfterTomorrow.setDate(today.getDate() + 2);
+    dayAfterTomorrow.setDate(today.getDate());
 
     // Format the day after tomorrow as YYYY-MM-DD for setting the input's min attribute
     const dayAfterTomorrowFormatted = dayAfterTomorrow.toISOString().split('T')[0];

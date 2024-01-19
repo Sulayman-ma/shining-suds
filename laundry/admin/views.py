@@ -15,15 +15,15 @@ def dashboard():
     orders = Order.query
     order_count = orders.count()
     in_progress = orders.filter_by(status=False).count()
-    completed = orders.filter_by(status=True).count()
-    total = sum([order.amount for order in orders.all()])
+    completed = orders.filter_by(status=True)
+    total = sum([order.amount for order in completed.all()])
     return render_template(
         'admin/dashboard.html', 
         orders=orders, 
         total=total, 
         order_count=order_count,
         in_progress=in_progress,
-        completed=completed
+        completed=completed.count()
     )
 
 

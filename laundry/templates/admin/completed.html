@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div id="main">
+<div id="main" style="min-height: 100vh;">
     <!-- FLASH MESSAGES -->
     {% for category, msg in get_flashed_messages(with_categories=True) %}
     <div class="pop-flash">
@@ -17,6 +17,9 @@
     </div>
 
     <div class="content">
+        {% if orders == [] %}
+        <h1 class="center">No orders yet</h1>
+        {% else %}
         <h3 class="center" style="margin-bottom: 0;">Filter by Service Type</h3>
         <div class="pure-menu pure-menu-horizontal filter">
             <ul class="pure-menu-list">
@@ -39,13 +42,14 @@
         <div class="pure-g">
             {% for order in orders %}
             <div class="pure-u-1 order">
-                <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
+                <h1>Order #{{ '{:04d}'.format(order.id) }}</h1>
                 <p>Customer: {{ User.get(order.user_id).email }}</p>
                 <p>Service Type: {{ order.service_type }}</p>
                 <h3>COST: {{ '₦{:,}'.format(order.amount) }}</h3>
             </div>
             {% endfor %}
         </div>
+        {% endif %}
     </div>
 </div>
 

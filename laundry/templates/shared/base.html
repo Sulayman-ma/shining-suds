@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <link type="image/png" sizes="99x97" rel="icon" href="/static/img/icon.png">
 
     <!-- PURE.CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
@@ -35,6 +35,25 @@
         <!-- Main Content -->
         {% block content %}
         {% endblock %}
+
+        <!-- footer -->
+        <div class="footer">
+            <h2 class="footer-header">Contact Us:</h2>
+            <div class="footer-row">
+            <div>
+                <img src="{{ url_for('static', filename='img/svg/phone.svg') }}" alt="phone-icon"width="30px">
+                <a href="tel:+2347043859619">07043859619</a>
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/svg/mail.svg') }}" alt="mail-icon"width="30px">
+                <a href="mailto:shiningsuds@gmail.com">shiningsuds@gmail.com</a>
+            </div>
+            <div>
+                <img src="{{ url_for('static', filename='img/svg/location.svg') }}" alt="location-icon"width="30px">
+                No. 1, Brains and Hammers Estate, <br> Galadimawa, Abuja
+            </div>
+            </div>
+        </div>
     </div>
 
     <script src="{{url_for('static', filename='js/main.js') }}"></script>

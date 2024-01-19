@@ -26,11 +26,13 @@ def login():
         if user.is_superuser:
             next = url_for('admin.dashboard')
             return redirect(next)
+        if not user.accepted_terms:
+            return redirect(url_for('main.terms'))
         next = request.args.get('next')
         if next is not None and next != '/':
             return redirect(next)
         # send users to home page
-        return redirect(url_for('main.profile'))
+        return redirect(url_for('main.user_home'))
     return render_template('shared/login.html')
 
 

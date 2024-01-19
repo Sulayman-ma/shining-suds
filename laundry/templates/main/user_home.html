@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="image/png" sizes="99x97" rel="icon" href="/static/img/icon.png">
+
+    <!-- PURE.CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pure-custom.css') }}", type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_custom.css') }}", type="text/css">
+
+    <title>Shining Suds - Home</title>
+</head>
+
+<body>
+  <!-- FLASH MESSAGES -->
+  {% for category, msg in get_flashed_messages(with_categories=True) %}
+  <div class="pop-flash">
+      <span class="{{ category }}">{{ msg }}</span>
+  </div>
+  {% endfor %}
+
+  <div class="header custom-header">
+    <h1>Home</h1>
+    <img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white">
+  </div>
+
+  <div class="user-content">
+    <!-- welcome message with schedule button -->
+    <div class="welcome">
+      <h1>Welcome to <br> Shining Suds <br> Laundromat</h1>
+      <a href="{{ url_for('main.schedule') }}" class="pure-button pure-button-primary general home-button">SCHEDULE NOW</a>
+    </div>
+
+    <h2>How It Works</h2>
+
+    <!-- how it works section -->
+    <div class="row-list">
+      <div>
+        <img src="{{ url_for('static', filename='img/svg/schedule-calendar.svg') }}" alt="schedule-icon"width="70px">
+        We Collect
+      </div>
+      <div>
+        <img src="{{ url_for('static', filename='img/svg/bubbles.svg') }}" alt="schedule-icon"width="70px">
+        We Clean
+      </div>
+      <div>
+        <img src="{{ url_for('static', filename='img/svg/truck.svg') }}" alt="schedule-icon"width="70px">
+        We Deliver
+      </div>
+    </div>
+
+    <!-- fast, reliable, seamless -->
+    <div class="mg-bot-50 hype" style="height: 200px;">
+      <h2>FAST•RELIABLE•SEAMLESS</h2>
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+    <h2 class="footer-header">Contact Us:</h2>
+    <div class="footer-row">
+      <div>
+        <img src="{{ url_for('static', filename='img/svg/phone.svg') }}" alt="phone-icon"width="30px">
+        <a href="tel:+2347043859619">07043859619</a>
+      </div>
+      <div>
+        <img src="{{ url_for('static', filename='img/svg/mail.svg') }}" alt="mail-icon"width="30px">
+        <a href="mailto:shiningsuds@gmail.com">shiningsuds@gmail.com</a>
+      </div>
+      <div>
+        <img src="{{ url_for('static', filename='img/svg/location.svg') }}" alt="location-icon"width="30px">
+        No. 1, Brains and Hammers Estate, <br> Galadimawa, Abuja
+      </div>
+    </div>
+  </div>
+
+  <script src="{{url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{url_for('static', filename='js/ui.js') }}"></script>
+</body>
+
+</html>

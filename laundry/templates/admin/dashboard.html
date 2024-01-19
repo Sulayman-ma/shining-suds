@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div id="main">
+<div id="main" style="min-height: 100vh;">
     <!-- FLASH MESSAGES -->
     {% for category, msg in get_flashed_messages(with_categories=True) %}
     <div class="pop-flash">

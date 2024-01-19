@@ -44,6 +44,10 @@ MY CUSTOM CSS FILES FOR FLASK FEATURES AND PERSONAL ADDITIONS
 
 /* MISC
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
+#main {
+    min-height: 100vh;
+}
+
 .center {
     display: flex;
     align-items: center;
@@ -61,6 +65,7 @@ MY CUSTOM CSS FILES FOR FLASK FEATURES AND PERSONAL ADDITIONS
 
 .mg-top-20 { margin-top: 20px; }
 .mg-top-50 { margin-top: 50px; }
+.mg-bot-50 { margin-bottom: 50px; }
 .mg-bot-20 { margin-bottom: 20px; }
 .mg-round { margin: 5px 5px; }
 .mg-zero { margin: 0; }
@@ -71,7 +76,7 @@ MY CUSTOM CSS FILES FOR FLASK FEATURES AND PERSONAL ADDITIONS
 
 .login, 
 .login a {
-    background-color: rgb(9, 63, 85);
+    background-color: #072D60;
     color: rgb(217, 234, 255);
     justify-content: center;
     align-items: center;
@@ -141,10 +146,15 @@ a.action,
 
 a.general,
 .general {
-    background-color: rgb(9, 63, 85);
+    background-color: #072D60;
     border-radius: 40px;
     cursor: pointer;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.home-button,
+a.home-button {
+    padding: 10px 25px;
 }
 
 input[type=text],
@@ -161,7 +171,7 @@ a.boring-btn,
 .boring-btn {
     background-color: rgb(194, 240, 255);
     font-weight: bolder;
-    color: rgb(9, 63, 85);
+    color: #072D60;
     text-transform: uppercase;
     border-radius: 40px;
     cursor: pointer;
@@ -169,12 +179,12 @@ a.boring-btn,
 }
 
 ::placeholder {
-    color: rgb(9, 63, 85);
+    color: #072D60;
     opacity: 0.7; /* Firefox */
 }
 
 ::-ms-input-placeholder { /* Edge 12 -18 */
-    color: rgb(9, 63, 85);
+    color: #072D60;
     opacity: 0.7;
 }
 
@@ -208,6 +218,10 @@ a.boring-btn,
     margin: auto;
 }
 
+#current {
+    padding-bottom: 40px;
+}
+
 .order {
     margin: 15px auto 10px auto;
     background-color: rgb(153, 229, 255);
@@ -217,7 +231,7 @@ a.boring-btn,
 }
 
 .order h1, .order h3, .order h4 {
-    color: rgb(9, 63, 85);
+    color: #072D60;
 }
 
 .order h1, .order p, .order h3, .order h4 {
@@ -234,16 +248,16 @@ a.boring-btn,
     cursor: pointer;    
     font-weight: bolder;
     font-size: larger;
-    color: rgb(9, 63, 85);
+    color: #072D60;
 }
 
 .active {
-    border-bottom: 5px solid rgb(9, 63, 85);
+    border-bottom: 5px solid #072D60;
 }
 
 /* ----------------------------------------------- */
 #home {
-    background-color: rgb(9, 63, 85);
+    background-color: #072D60;
     color: rgb(217, 234, 255);
 }
 
@@ -251,4 +265,120 @@ a.boring-btn,
     width: 50%;
     /* margin: auto; */
     margin-left: 20%;
+}
+
+/* User home page
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.user-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    /* color: #093f55; */
+    border-color: white;
+}
+
+.user-content .welcome {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    background-image: url('/static/img/stuff.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    padding: 15px 0;
+}
+
+.user-content .hype {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+    background-image: url('/static/img/machines.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    padding: 15px 0;
+}
+
+.user-content .hype h2 {
+    background-color: rgba(255, 255, 255, 0.377);
+    padding: 20px;
+    color: #072D60;
+    font-weight: bolder;
+    line-height: 1.5;
+    border-radius: 20px;
+    margin: 20px 10px 0 10px;
+}
+
+.user-content .welcome h1, .user-content .welcome h2 {
+    background-color: rgba(255, 255, 255, 0.377);
+    padding: 20px;
+    color: #072D60;
+    font-weight: bolder;
+    line-height: 1.5;
+    border-radius: 20px;
+    margin: 20px 10px 0 10px;
+}
+
+.user-content h3 {
+    color: #072D60;
+}
+
+.footer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+    padding-bottom: 20px;
+    width: 100%;
+    background-color: #072D60;
+}
+
+.footer a {
+    text-decoration: none;
+    color: rgb(247, 247, 247);
+}
+
+.footer-header {
+    color: white;
+    text-align: center;
+}
+
+.row-list {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #072D60;
+    font-weight: 700;
+}
+
+.row-list div,
+.footer-row div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7px;
+}
+
+.footer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+}
+
+@media (max-width: 600px) {
+    .footer-row {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
 }

@@ -25,15 +25,15 @@
 <!-- ------------------ -->
 
 {% elif not current_user.is_superuser %}
-<!-- OWNER MENU -->
+<!-- USER MENU -->
 <div class="pure-menu">
     <span class="pure-menu-heading">Shining Suds</span>
     <ul class="pure-menu-list">
         <li class="pure-menu-item">
-            <a class="pure-menu-link" href="{{ url_for('main.profile') }}">Profile</a>
+            <a class="pure-menu-link" href="{{ url_for('main.schedule') }}">Schedule</a>
         </li>
         <li class="pure-menu-item">
-            <a class="pure-menu-link" href="{{ url_for('main.schedule') }}">Schedule</a>
+            <a class="pure-menu-link" href="{{ url_for('main.profile') }}">Profile</a>
         </li>
         <li class="pure-menu-item">
             <a class="pure-menu-link" href="{{ url_for('main.orders') }}">My Orders</a>

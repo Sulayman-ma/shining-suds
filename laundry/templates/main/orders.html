@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div id="main">
+<div id="main" style="min-height: 100vh;">
     <!-- FLASH MESSAGES -->
     {% for category, msg in get_flashed_messages(with_categories=True) %}
     <div class="pop-flash">
@@ -19,6 +19,9 @@
     </div>
 
     <div class="content" id="inProgress">
+        {% if orders == [] %}
+        <h1 class="center">No orders yet</h1>
+        {% else %}
         <div class="pure-g">
             <div class="pure-u-1-2">
                 <button type="button" class="tab-button active" onclick="orderView('current')">Current Orders</button>
@@ -34,8 +37,9 @@
             {% for order in orders %}
             {% if not order.status %}
             <div class="pure-u-1 order">
-                <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
+                <h1>Order #{{ '{:04d}'.format(order.id) }}</h1>
                 <p>Pickup: {{ order.pickup_date.strftime('%a, %d %b %Y') }} at {{ order.pickup_addr }}</p>
+                <p>Delivery: {{ order.delivery_date.strftime('%a, %d %b %Y') }} at {{ order.delivery_addr }}</p>
                 <p>Service Type: {{ order.service_type }}</p>
                 <h4>Cost: {{ '₦{:,}'.format(order.amount) }}</h4>
                 <h3>STATUS: IN PROGRESS</h3>
@@ -48,8 +52,9 @@
             {% for order in orders %}
             {% if order.status %}
             <div class="pure-u-1 order">
-                <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
+                <h1>Order #{{ '{:04d}'.format(order.id) }}</h1>
                 <p>Pickup: {{ order.pickup_date.strftime('%a, %d %b %Y') }} at {{ order.pickup_addr }}</p>
+                <p>Delivery: {{ order.delivery_date.strftime('%a, %d %b %Y') }} at {{ order.delivery_addr }}</p>
                 <p>Service Type: {{ order.service_type }}</p>
                 <h4>Cost: {{ '₦{:,}'.format(order.amount) }}</h4>
                 <h3>STATUS: COMPLETED</h3>
@@ -62,6 +67,7 @@
             {% endif %}
             {% endfor %}
         </div>
+        {% endif %}
     </div>
 </div>
 

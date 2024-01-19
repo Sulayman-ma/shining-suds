@@ -40,9 +40,6 @@ class ScheduleOrder(FlaskForm):
     payment_option = SelectField(label='Payment Option', choices=[
         'Cash On Delivery', 'Online'
     ])
-    service_type = SelectField(label='Service Type', choices=[
-        'WASH & IRON', 'WASH', 'IRON', 'STEAM', 'BLEACH', 'STAIN REMOVAL'
-    ])
     pickup_date = DateField(label='Pickup Date', render_kw={
         'required': 'required'
     })
@@ -54,6 +51,7 @@ class ScheduleOrder(FlaskForm):
     })
     special_instr = TextAreaField(label='Special Instructions')
     clothes_count = IntegerField(label='Clothes Count', render_kw={
+        'id': 'count',
         'placeholder': 'Number of clothes',
         'required': 'required'
     }, validators=[InputRequired()])

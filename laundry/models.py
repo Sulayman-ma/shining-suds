@@ -15,6 +15,7 @@ class User(db.Model, UserMixin):
     name = db.Column(db.String, nullable=False)
     email = db.Column(db.String, unique=True, index=True, nullable=False)
     hashed_password = db.Column(db.String, nullable=False)
+    accepted_terms = db.Column(db.Boolean(), default=False)
     is_active = db.Column(db.Boolean(), default=True)
     is_superuser = db.Column(db.Boolean(), default=False)
     phone = db.Column(db.String())
@@ -48,9 +49,10 @@ class Order(db.Model):
     amount = db.Column(db.Integer, nullable=False)
     clothes_count = db.Column(db.Integer, nullable=False)
     status = db.Column(db.BOOLEAN, default=False)
-    service_type = db.Column(db.String, default='WASH & IRON')
+    service_type = db.Column(db.String, nullable=False)
     created = db.Column(db.DateTime, default=datetime.datetime.now())
     pickup_date = db.Column(db.DateTime, nullable=False)
+    delivery_date = db.Column(db.DateTime, nullable=False)
     pickup_addr = db.Column(db.String, nullable=False)
     delivery_addr = db.Column(db.String, nullable=False)
     reviewed = db.Column(db.BOOLEAN, default=False)
@@ -81,6 +83,17 @@ class Message(db.Model):
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
+
+class Service(db.Model):
+    __tablename__ = 'services'
+
+    id = db.Column(db.Integer, primary_key=True)
+    type = db.Column(db.String, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
+
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+
 
 
 """"SQLAlchemy User loader helper function"""

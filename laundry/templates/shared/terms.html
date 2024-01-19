@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link type="image/png" sizes="99x97" rel="icon" href="/static/img/icon.png">
+
+    <!-- PURE.CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/base-min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css">
+
+    <!-- CUSTOM CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/pure-custom.css') }}", type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/my_custom.css') }}", type="text/css">
+
+    <title>Terms & Conditions</title>
+</head>
+
+<body>
+  <!-- FLASH MESSAGES -->
+  {% for category, msg in get_flashed_messages(with_categories=True) %}
+  <div class="pop-flash">
+      <span class="{{ category }}">{{ msg }}</span>
+  </div>
+  {% endfor %}
+
+  <div class="header custom-header">
+    <h1>Terms & Conditions</h1>
+    <img src="{{ url_for('static', filename='img/svg/icon-title-white.svg') }}" alt="icon-title-white">
+  </div>
+
+  <div class="content">
+    <p>
+      Please read these terms and conditions carefully before using the <a href="{{ url_for('main.home') }}">shiningsuds.com</a> website, "Website", "service” operated by Shining Suds Laundromat (Us", We", "our). <br>
+      Conditions of use <br>
+      By using this website, you certify that you have read and reviened this Agreement and that you agree to comply with accordingly. Shining Suds Laundromat only grants use and access of this website, its products, and is services to those who have accepted its terms. <br>
+      Intellectual property <br>
+      You agree that all materials, products, and services provided on this website are the property of Shining Suds Laundromat , its affiliates, directors, officers, employees, agents, suppliers, or licensors inciuding all copyrighes, trade secrets. trademarks, patents, and other inteloctual property. You also agree that you will not reproduce or redistribute the Shining Suds Laundromat’s intellectual property in any way, including cloctronic, digital, or new tradamark registrations. <br>
+      You grant Shining Suds Laundromat a royalty-free and non-exclusive loanse to dispiay, use, copy, transmit, and broadcast the content you upload and publish. For issues regarding intellectual property claims, you should contact the company in order to come to an agreement.
+      User accounts <br>
+      As a user of this website, you may be askod to register with us and provide private information You are responsible for ensuring the accuracy of this information. You are also responsible for all activities that occur under your account or password. <br>
+      If you think there are any possible issues regarding the security of your account on the website, inform us immediately so we can address the issues. <br>
+      We reserve all rights to terminate accounts, edit or remove content and cancel orders at our sole discretion. <br>
+
+      Limitation on liability <br>
+      Shining Suds Laundromat is not liable for any damages that may occur to you as a result of your misuse of our website. Shining Suds Laundromat reserves the right to coit, modify, and change this Agreement af any time. We shall let our users know of these changes through electronic mail. This Agreement is an understanding between Shining Suds Laundromat and the user, and this supersedes and replaces all prior agreements regarding the use of this website.
+    </p>
+
+    <hr>
+
+    {% if not current_user.accepted_terms %}
+    <form method="post" class="pure-form pure-form-stacked mg-top-50">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+      <div class="center mg-top-20">
+          <input type="submit" value="ACCEPT" class="pure-button pure-button-primary boring-btn">
+      </div>
+    </form>
+    {% else %}
+    <a href="{{ url_for('.profile') }}" class="pure-button pure-button-primary general">GO BACK</a>
+    {% endif %}
+  </div>
+</body>
+
+</html>

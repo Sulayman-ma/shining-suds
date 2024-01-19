@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<div id="main">
+<div id="main" style="min-height: 100vh;">
     <!-- FLASH MESSAGES -->
     {% for category, msg in get_flashed_messages(with_categories=True) %}
     <div class="pop-flash">
@@ -17,6 +17,9 @@
     </div>
 
     <div class="content">
+        {% if orders == [] %}
+        <h1 class="center">No orders in progress</h1>
+        {% else %}
         <h3 class="center" style="margin-bottom: 0;">Filter by Service Type</h3>
         <div class="pure-menu pure-menu-horizontal filter">
             <ul class="pure-menu-list">
@@ -41,11 +44,14 @@
             <div class="pure-u-1 order">
                 <form method="post" class="pure-form" action="{{ url_for('.complete_order', id=order.id) }}">
                     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                    <h1>Order #{{ '{:03d}'.format(order.id) }}</h1>
+                    <h1>Order #{{ '{:04d}'.format(order.id) }}</h1>
                     <p>Pickup: {{ order.pickup_date.strftime('%a, %d %b %Y') }} at {{ order.pickup_addr }}</p>
                     <p>Delivery: {{ order.delivery_date.strftime('%a, %d %b %Y') }} at {{ order.delivery_addr }}</p>
                     <p>Customer: {{ User.get(order.user_id).email }}</p>
                     <p>Service Type: {{ order.service_type }}</p>
+                    {% if order.special_instr %}
+                        <p>Instructions: {{ order.special_instr }}</p>
+                    {% endif %}
                     <h3>COST: {{ '₦{:,}'.format(order.amount) }}</h3>
                     <div class="pure-controls">
                         <input type="submit" class="submit pure-button pure-button-primary" value="Mark as Complete">
@@ -54,6 +60,7 @@
             </div>
             {% endfor %}
         </div>
+        {% endif %}
     </div>
 </div>
 

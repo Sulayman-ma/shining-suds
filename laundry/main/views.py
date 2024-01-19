@@ -1,4 +1,5 @@
 import datetime
+import random
 
 from flask import render_template, url_for, redirect, flash, session, current_app, request
 from flask_login import current_user, login_required
@@ -15,6 +16,27 @@ from laundry.main.forms import EditProfile, ScheduleOrder
 @main.route('/')
 def home():
     return render_template('shared/home.html')
+
+
+@main.route('/home')
+@login_required
+def user_home():
+    return render_template('main/user_home.html')
+
+
+@main.route('/terms', methods=['GET', 'POST'])
+def terms():
+    if request.method == 'POST':
+        current_user.accepted_terms = True
+        db.session.commit()
+        return redirect(url_for('.user_home'))
+    return render_template('shared/terms.html')
+
+
+@main.route('/support')
+@login_required
+def support():
+    return render_template('shared/support.html')
 
 
 @main.route('/create_account', methods=['GET', 'POST'])
@@ -61,6 +83,7 @@ def profile():
             if form.current_password.data and form.new_password.data:
                 if not current_user.verify_password(form.current_password.data):
                     flash('Incorrect current password', 'error')
+                    return redirect(url_for('.profile'))
                 else:
                     current_user.password = form.new_password.data
             db.session.commit()
@@ -84,7 +107,7 @@ def profile():
 @main.route('/orders')
 @login_required
 def orders():
-    orders = Order.query.filter_by(user_id = current_user.id).order_by(Order.created).all()
+    orders = Order.query.filter_by(user_id = current_user.id).order_by(Order.created.desc()).all()
     return render_template('main/orders.html', orders=orders)
 
 
@@ -118,7 +141,6 @@ def write_review(id: int):
     return render_template('main/write_review.html', id=id)
 
 
-
 def create_order(data: dict) -> Order:
     """Helper function for creating an order after scheduling and/or making the payment
     
@@ -133,21 +155,39 @@ def create_order(data: dict) -> Order:
     return order
 
 
+def random_delivery_date(pickup_date):
+    number = random.randint(3, 7)
+    return pickup_date + datetime.timedelta(days=number)
+
+
 @main.route('/schedule', methods=['GET', 'POST'])
 @login_required
 def schedule():
     form = ScheduleOrder()
+    services = {
+        'WASH & IRON': 200, 
+        'WASH': 100, 
+        'IRON': 100, 
+        'STEAM': 150, 
+        'BLEACH': 200, 
+        'STAIN REMOVAL': 300
+    }
     if form.validate_on_submit():
         try:
+            service = request.form.get('service')
             clothes_count = form.clothes_count.data
+            service_cost = services.get(service)
+            amount = service_cost * form.clothes_count.data
             pickup_date = datetime.datetime.strptime(str(form.pickup_date.data), '%Y-%m-%d')
+            delivery_date = random_delivery_date(pickup_date)
             # store form data for processing
             session.setdefault('order_data', {
-                'amount': clothes_count * 50,
+                'amount': amount,
                 'special_instr': form.special_instr.data,
-                'service_type': form.service_type.data,
+                'service_type': service,
                 'clothes_count': clothes_count,
                 'pickup_date': pickup_date,
+                'delivery_date': delivery_date,
                 'pickup_addr': form.pickup_addr.data or current_user.address,
                 'delivery_addr': form.delivery_addr.data or current_user.address,
                 'user_id': current_user.id
@@ -162,7 +202,7 @@ def schedule():
         except:
             flash('An error has occured, please try again', 'error')
             return redirect(url_for('.schedule'))
-    return render_template('main/schedule.html', form=form)
+    return render_template('main/schedule.html', form=form, services=services)
 
 
 @main.route('/schedule/<int:id>')
