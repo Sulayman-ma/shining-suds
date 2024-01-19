@@ -1,14 +1,16 @@
 @echo off
 
 if exist .\venv\ (
-    echo "Venv found"
+    echo "Activating virtual environment..."
+    CALL venv\Scripts\activate
 ) else (
-    echo Creating virtual environment...
+    echo "Creating virtual environment..."
     python -m venv venv
-    echo Installing dependencies...
+    echo "Activating virtual environment..."
+    CALL venv\Scripts\activate
+    echo "Installing dependencies..."
     pip install -r requirements.txt
 )
 
-CALL venv\Scripts\activate
-echo Starting application...
+echo "Starting application..."
 flask run
