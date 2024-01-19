@@ -13,6 +13,6 @@ Before running the Flask app, make sure you have the following installed:
    - git clone https://github.com/Sulayman-ma/shining-suds.git
    - Navigate to the app root directory with `cd shining-suds`
 2. **Virtual Environment**
-   - (Recommended) The batch file in the root directory automatically creates a virtual environment, activates it, installs the required dependencies and runs the application
-   - You can also choose to do this manually by inspecting the file and running the commands manually as required.
+   - (Recommended) The batch file in the root directory automatically handles the creation and activation of the virtual environment, dependency installation and running of the application. Use `ctrl + c` to terminate the batch job and close the application.
+   - You can also do this manually by inspecting the file and running the commands individually.
 3. **Open your browser to [localhost port 5000](http://localhost:5000) and you're ready to go!**
